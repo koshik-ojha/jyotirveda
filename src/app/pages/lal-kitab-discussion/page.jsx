@@ -15,7 +15,7 @@ const FAQS = [
   },
   {
     q: "Why are the houses fixed in Lal Kitab?",
-    a: "The 1939 author, Pandit Roopchand Joshi, chose a fixed-house mandala to make the system democratic: anyone can read their chart without first computing the ascendant. The cost is that some Vedic nuances (lagna lord, kendras from ascendant) don't apply.",
+    a: "The author, chose a fixed-house mandala to make the system democratic: anyone can read their chart without first computing the ascendant. The cost is that some Vedic nuances (lagna lord, kendras from ascendant) don't apply.",
   },
   {
     q: "Are Lal Kitab remedies really effective?",

@@ -6,6 +6,13 @@ import AstrologicalTools from "@/components/AstrologicalTools";
 import DetailedReports from "@/components/DetailedReports";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "Free Kundli, Daily Horoscope & Panchang Online",
+  description:
+    "VedaAI brings AI-powered Vedic astrology — free kundli, daily rashifal, panchang, kundli matching, numerology, tarot, muhurat and 60+ tools in one place.",
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   return (
     <>

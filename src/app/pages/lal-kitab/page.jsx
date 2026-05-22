@@ -26,9 +26,9 @@ export default function LalKitabHomePage() {
       <Navbar />
       <main className="cosmic-bg min-h-screen text-white">
         <section className="relative stars-bg pt-20 pb-10 px-6 text-center">
-          <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-veda-orange mb-5 px-4 py-1.5 rounded-full bg-veda-orange/10 border border-veda-orange/20">
+          {/* <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-veda-orange mb-5 px-4 py-1.5 rounded-full bg-veda-orange/10 border border-veda-orange/20">
             <FiBookOpen className="w-3 h-3" /> Pandit Roopchand Joshi · 1939
-          </div>
+          </div> */}
           <h1 className="text-4xl md:text-6xl font-serif text-gradient-gold mb-4">Lal Kitab</h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">
             "The Red Book" — Vedic astrology re-imagined with a fixed-house chart and breathtakingly practical remedies (totke). Compute your teva below.

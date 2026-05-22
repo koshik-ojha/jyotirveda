@@ -12,7 +12,7 @@ const GROUPS = [
   { name: "Lal Kitab Astrology Group",   members: "115k+",  desc: "General Lal Kitab discussion, remedies, charts" },
   { name: "Lal Kitab Remedies (Totke)",  members: "48k+",   desc: "Focused on the remedies side of Lal Kitab practice" },
   { name: "Lal Kitab India (Hindi)",     members: "92k+",   desc: "Hindi-language community and live Q&A sessions" },
-  { name: "Pandit Roopchand Joshi Fans", members: "23k+",   desc: "Devoted to the original 1939 volumes and their translations" },
+  // { name: "Pandit Roopchand Joshi Fans", members: "23k+",   desc: "Devoted to the original 1939 volumes and their translations" },
 ];
 
 export default function LalKitabFacebookPage() {

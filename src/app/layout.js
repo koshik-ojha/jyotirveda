@@ -28,9 +28,45 @@ const gujarati = Noto_Sans_Gujarati({
 });
 
 export const metadata = {
-  title: "VedaAI - Wisdom of the Ages, Precision of AI",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://jyotirveda.wedoodles.com"
+  ),
+  title: {
+    default: "VedaAI – Wisdom of the Ages, Precision of AI",
+    template: "%s | VedaAI",
+  },
   description:
     "Unlock the secrets of the cosmos. VedaAI fuses 8,000 years of Vedic tradition with cutting-edge neural networks for life's most accurate spiritual guidance.",
+  keywords: [
+    "Vedic astrology",
+    "kundli",
+    "horoscope",
+    "rashifal",
+    "panchang",
+    "numerology",
+    "tarot",
+    "lal kitab",
+    "AI astrology",
+  ],
+  applicationName: "VedaAI",
+  authors: [{ name: "VedaAI" }],
+  openGraph: {
+    type: "website",
+    siteName: "VedaAI",
+    title: "VedaAI – Wisdom of the Ages, Precision of AI",
+    description:
+      "AI-powered Vedic astrology: free kundli, daily horoscope, panchang, numerology, matching, muhurat and more.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VedaAI – Wisdom of the Ages, Precision of AI",
+    description:
+      "AI-powered Vedic astrology: free kundli, daily horoscope, panchang, numerology, matching, muhurat and more.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({ children }) {
