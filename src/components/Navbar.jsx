@@ -7,6 +7,8 @@ import { FiSearch, FiPlus, FiChevronDown, FiMenu, FiX, FiGlobe } from "react-ico
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n/context";
+import { useT } from "@/lib/i18n/useT";
 
 const LANGUAGES = [
   { code: "en", label: "English" },
@@ -341,9 +343,10 @@ function SearchModal({ open, onClose }) {
 }
 
 function LanguageDropdown() {
+  const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(LANGUAGES[0]);
   const ref = useRef(null);
+  const selected = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -372,19 +375,19 @@ function LanguageDropdown() {
           role="listbox"
           className="absolute right-0 top-full mt-2 w-36 rounded-xl border border-white/10 bg-veda-dark/95 backdrop-blur-xl shadow-xl shadow-black/40 p-1 z-50"
         >
-          {LANGUAGES.map((lang) => (
-            <li key={lang.code} role="option" aria-selected={selected.code === lang.code}>
+          {LANGUAGES.map((l) => (
+            <li key={l.code} role="option" aria-selected={lang === l.code}>
               <button
                 type="button"
-                onClick={() => { setSelected(lang); setOpen(false); }}
+                onClick={() => { setLang(l.code); setOpen(false); }}
                 className={cn(
                   "w-full text-left rounded-md px-3 py-2 text-sm transition-colors",
-                  selected.code === lang.code
+                  lang === l.code
                     ? "text-veda-orange bg-white/5 font-semibold"
                     : "text-white/60 hover:bg-white/5 hover:text-white",
                 )}
               >
-                {lang.label}
+                {l.label}
               </button>
             </li>
           ))}
@@ -399,8 +402,8 @@ export default function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileLang, setMobileLang] = useState(LANGUAGES[0]);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { lang: mobileLangCode, setLang: setMobileLangCode } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -511,19 +514,19 @@ export default function Navbar() {
               />
               <div className="flex items-center gap-2">
                 <div className="flex rounded-lg overflow-hidden border border-white/10 text-xs">
-                  {LANGUAGES.map((lang) => (
+                  {LANGUAGES.map((l) => (
                     <button
-                      key={lang.code}
+                      key={l.code}
                       type="button"
-                      onClick={() => setMobileLang(lang)}
+                      onClick={() => setMobileLangCode(l.code)}
                       className={cn(
                         "px-3 py-1.5 transition-colors",
-                        mobileLang.code === lang.code
+                        mobileLangCode === l.code
                           ? "bg-veda-orange text-white font-semibold"
                           : "text-white/50 hover:text-white",
                       )}
                     >
-                      {lang.label}
+                      {l.label}
                     </button>
                   ))}
                 </div>

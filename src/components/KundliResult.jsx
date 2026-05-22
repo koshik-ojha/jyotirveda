@@ -4,6 +4,8 @@ import { FiStar, FiSun, FiMoon, FiClock, FiCompass, FiDownload, FiPrinter } from
 import NorthIndianChart from "@/components/charts/NorthIndianChart";
 import SouthIndianChart from "@/components/charts/SouthIndianChart";
 import { planetsBySign, navamsaChart } from "@/lib/astro/chartLayout";
+import { useLanguage } from "@/lib/i18n/context";
+import { pickLang } from "@/lib/i18n/useT";
 
 function StatCard({ icon: Icon, label, value, subtitle }) {
   return (
@@ -20,7 +22,9 @@ function StatCard({ icon: Icon, label, value, subtitle }) {
   );
 }
 
-export default function KundliResult({ kundli, lang = "en" }) {
+export default function KundliResult({ kundli, lang: langProp }) {
+  const ctx = useLanguage();
+  const lang = langProp ?? ctx.lang;
   const rootRef = useRef(null);
   const [chartStyle, setChartStyle] = useState("north"); // "north" | "south"
 
@@ -53,7 +57,7 @@ export default function KundliResult({ kundli, lang = "en" }) {
   }, []);
 
   if (!kundli) return null;
-  const lbl = (o) => (lang === "hi" ? o.hi || o.en : o.en);
+  const lbl = (o) => pickLang(o, lang);
 
   const handleExport = () => {
     if (typeof window !== "undefined") window.print();

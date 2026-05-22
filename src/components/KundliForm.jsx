@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FiSettings, FiStar, FiChevronDown, FiRotateCcw } from "react-icons/fi";
+import { useLanguage } from "@/lib/i18n/context";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -36,7 +37,9 @@ function normalizeTime(t) {
 
 const DEFAULT_OPTIONS = { ayanamsa: "LAHIRI", houseSystem: "WHOLE_SIGN", nodeType: "TRUE" };
 
-export default function KundliForm({ lang = "en" }) {
+export default function KundliForm({ lang: langProp }) {
+  const ctx = useLanguage();
+  const lang = langProp ?? ctx.lang;
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [birthDate, setBirthDate] = useState(null);

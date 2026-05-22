@@ -2,22 +2,36 @@
 import { useEffect, useMemo, useState } from "react";
 import { FiSun, FiHeart, FiBriefcase, FiActivity, FiDollarSign, FiStar, FiArrowRight } from "react-icons/fi";
 import { RASHIS } from "@/lib/astro/constants";
+import { useLanguage } from "@/lib/i18n/context";
+import { pickLang } from "@/lib/i18n/useT";
 
 const PERIOD_LABELS = {
-  today:    { en: "Today",    hi: "आज" },
-  tomorrow: { en: "Tomorrow", hi: "कल" },
-  weekly:   { en: "This Week",hi: "इस सप्ताह" },
-  monthly:  { en: "This Month", hi: "इस माह" },
-  yearly:   { en: "This Year",  hi: "इस वर्ष" },
+  today:    { en: "Today",      hi: "आज",         gu: "આજે" },
+  tomorrow: { en: "Tomorrow",   hi: "कल",         gu: "આવતીકાલે" },
+  weekly:   { en: "This Week",  hi: "इस सप्ताह",  gu: "આ સપ્તાહ" },
+  monthly:  { en: "This Month", hi: "इस माह",     gu: "આ મહિને" },
+  yearly:   { en: "This Year",  hi: "इस वर्ष",    gu: "આ વર્ષે" },
 };
 
 const SECTIONS = [
-  { key: "general", icon: FiSun,        en: "General",  hi: "सामान्य" },
-  { key: "love",    icon: FiHeart,      en: "Love",     hi: "प्रेम" },
-  { key: "career",  icon: FiBriefcase,  en: "Career",   hi: "करियर" },
-  { key: "health",  icon: FiActivity,   en: "Health",   hi: "स्वास्थ्य" },
-  { key: "finance", icon: FiDollarSign, en: "Finance",  hi: "वित्त" },
+  { key: "general", icon: FiSun,        en: "General", hi: "सामान्य",   gu: "સામાન્ય" },
+  { key: "love",    icon: FiHeart,      en: "Love",    hi: "प्रेम",     gu: "પ્રેમ" },
+  { key: "career",  icon: FiBriefcase,  en: "Career",  hi: "करियर",     gu: "કારકિર્દી" },
+  { key: "health",  icon: FiActivity,   en: "Health",  hi: "स्वास्थ्य", gu: "આરોગ્ય" },
+  { key: "finance", icon: FiDollarSign, en: "Finance", hi: "वित्त",      gu: "નાણાં" },
 ];
+
+const HEADINGS = {
+  horoscope: { en: "Horoscope", hi: "राशिफल", gu: "રાશિફળ" },
+  pickSign:  { en: "Tap your moon sign for the full reading", hi: "अपनी राशि चुनें", gu: "તમારી રાશિ પસંદ કરો" },
+  lord:      { en: "Lord", hi: "स्वामी", gu: "સ્વામી" },
+  luckyColor:{ en: "Lucky color", hi: "शुभ रंग", gu: "શુભ રંગ" },
+  luckyNum:  { en: "Lucky number", hi: "शुभ अंक", gu: "શુભ અંક" },
+  bestTime:  { en: "Best time", hi: "शुभ समय", gu: "શુભ સમય" },
+  direction: { en: "Direction", hi: "दिशा", gu: "દિશા" },
+  liveTransits: { en: "Live Transits", hi: "वर्तमान गोचर", gu: "વર્તમાન ગોચર" },
+  pickAbove: { en: "Pick your sign above for the detailed reading", hi: "ऊपर से अपनी राशि चुनें", gu: "ઉપરથી તમારી રાશિ પસંદ કરો" },
+};
 
 function gradeClass(score) {
   if (score >= 75) return "text-emerald-300 bg-emerald-500/10 border-emerald-500/20";
@@ -26,7 +40,9 @@ function gradeClass(score) {
   return "text-rose-300 bg-rose-500/10 border-rose-500/20";
 }
 
-export default function HoroscopeViewer({ period = "today", lang = "en", focus = null }) {
+export default function HoroscopeViewer({ period = "today", lang: langProp, focus = null }) {
+  const ctx = useLanguage();
+  const lang = langProp ?? ctx.lang;
   const [horoscopes, setHoroscopes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -49,7 +65,8 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
   }, [period]);
 
   const active = useMemo(() => (activeIdx != null ? horoscopes[activeIdx] : null), [activeIdx, horoscopes]);
-  const periodLabel = PERIOD_LABELS[period]?.[lang] || period;
+  const periodLabel = pickLang(PERIOD_LABELS[period], lang) || period;
+  const h = (key) => pickLang(HEADINGS[key], lang);
 
   return (
     <div className="space-y-8">
@@ -57,13 +74,9 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
       <div>
         <div className="flex items-end justify-between mb-4 flex-wrap gap-3">
           <h3 className="font-serif text-xl text-white">
-            {lang === "hi" ? `राशिफल — ${periodLabel}` : `Horoscope — ${periodLabel}`}
+            {h("horoscope")} — {periodLabel}
           </h3>
-          <p className="text-sm text-white/40">
-            {lang === "hi"
-              ? "अपनी राशि चुनें"
-              : "Tap your moon sign for the full reading"}
-          </p>
+          <p className="text-sm text-white/40">{h("pickSign")}</p>
         </div>
 
         {loading ? (
@@ -87,14 +100,14 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-serif text-white text-base">
-                      {lang === "hi" ? h.sign.hi : h.sign.en}
+                      {pickLang(h.sign, lang)}
                     </span>
                     <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border ${gradeClass(h.score)}`}>
                       {h.score}
                     </span>
                   </div>
                   <p className="text-xs text-white/45">
-                    {lang === "hi" ? h.sign.en : h.sign.sa}
+                    {lang === "en" ? h.sign.sa : h.sign.en}
                   </p>
                   <p className="text-[11px] text-veda-gold/70 mt-1">{h.rating}</p>
                 </button>
@@ -110,11 +123,10 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
           <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
             <div>
               <h3 className="font-serif text-3xl text-white">
-                {lang === "hi" ? active.sign.hi : active.sign.en}
+                {pickLang(active.sign, lang)}
               </h3>
               <p className="text-white/40 text-sm mt-0.5">
-                {active.sign.sa} · {lang === "hi" ? "स्वामी" : "Lord"} {active.signLord} ·{" "}
-                {periodLabel}
+                {active.sign.sa} · {h("lord")} {active.signLord} · {periodLabel}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -128,10 +140,10 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
           {/* Lucky chips */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {[
-              [lang === "hi" ? "शुभ रंग" : "Lucky color", active.lucky.color],
-              [lang === "hi" ? "शुभ अंक" : "Lucky number", active.lucky.number],
-              [lang === "hi" ? "शुभ समय" : "Best time", active.lucky.time],
-              [lang === "hi" ? "दिशा" : "Direction", active.lucky.direction],
+              [h("luckyColor"), active.lucky.color],
+              [h("luckyNum"),   active.lucky.number],
+              [h("bestTime"),   active.lucky.time],
+              [h("direction"),  active.lucky.direction],
             ].map(([k, v]) => (
               <div key={k} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
                 <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{k}</div>
@@ -149,7 +161,7 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
                 </div>
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-widest text-white/55">
-                    {lang === "hi" ? s.hi : s.en}
+                    {pickLang(s, lang)}
                   </h4>
                   <p className="text-sm text-white/70 mt-1 leading-relaxed">
                     {active.readings[s.key]}
@@ -162,7 +174,7 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
           {/* Active transits */}
           <div className="mt-6">
             <h4 className="text-[11px] font-bold uppercase tracking-widest text-white/45 mb-3">
-              {lang === "hi" ? "वर्तमान गोचर" : "Live Transits"}
+              {h("liveTransits")}
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {active.aspects.map((a, i) => (
@@ -178,9 +190,7 @@ export default function HoroscopeViewer({ period = "today", lang = "en", focus =
 
       {!active && !loading && (
         <p className="text-center text-white/35 text-sm">
-          {lang === "hi"
-            ? "ऊपर से अपनी राशि चुनें"
-            : "Pick your sign above for the detailed reading"}
+          {h("pickAbove")}
         </p>
       )}
     </div>

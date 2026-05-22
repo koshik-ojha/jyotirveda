@@ -28,6 +28,65 @@ body {
   font-family: var(--font-poppins), Poppins, sans-serif;
 }
 
+/* Stack Devanagari and Gujarati script fonts after the Latin defaults so
+   Hindi/Gujarati glyphs render with proper typography. Latin chars are
+   unchanged because the script fonts don't override them. */
+html, body {
+  font-family:
+    var(--font-poppins), Poppins,
+    var(--font-devanagari), "Noto Sans Devanagari",
+    var(--font-gujarati), "Noto Sans Gujarati",
+    sans-serif;
+}
+
+/* ── Google Translate widget — completely hidden ────────────────────────── */
+/* Banner at the top "Translated to <X>" — covers every variant GT uses */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+.skiptranslate iframe,
+.goog-te-ftab,
+.goog-te-ftab-float,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+/* "Show original" hover highlight */
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+/* GT injects `body { top: 40px !important }` to make room for the banner.
+   Force it back. Selector specificity is high to win over GT's inline style
+   when combined with the JS top-reset in the provider. */
+body,
+body.skiptranslate {
+  top: 0 !important;
+  position: static !important;
+  min-height: 100vh !important;
+}
+html { min-height: 100vh; }
+/* The dropdown gadget (we use our own UI) */
+#google_translate_element,
+.goog-te-gadget {
+  display: none !important;
+  font-size: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+.goog-te-gadget > span > a { display: none !important; }
+/* The "Translated text..." tooltip Google shows on hover */
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-l4eHX-hSRGPd { display: none !important; }
+
 .hero-gradient-overlay {
   background: linear-gradient(to bottom, rgba(11, 13, 23, 0.4), rgba(255, 255, 255, 0));
 }
