@@ -133,7 +133,9 @@
       "Bash(curl -s -H \"Cookie: jv_lang=gu\" http://localhost:3000/)",
       "Bash(curl -s -H \"Cookie: jv_lang=hi\" http://localhost:3000/pages/zodiac-signs)",
       "Bash(curl -s -H \"Cookie: jv_lang=gu\" http://localhost:3000/pages/zodiac-signs)",
-      "Bash(python -c \"import json,sys;h=json.load\\(sys.stdin\\)['horoscope'];print\\('Sign keys:',list\\(h['sign'].keys\\(\\)\\)\\);print\\('  en=',h['sign']['en']\\);print\\('  hi=',h['sign']['hi']\\);print\\('  gu=',h['sign'].get\\('gu'\\)\\)\")"
+      "Bash(python -c \"import json,sys;h=json.load\\(sys.stdin\\)['horoscope'];print\\('Sign keys:',list\\(h['sign'].keys\\(\\)\\)\\);print\\('  en=',h['sign']['en']\\);print\\('  hi=',h['sign']['hi']\\);print\\('  gu=',h['sign'].get\\('gu'\\)\\)\")",
+      "Bash(node *)",
+      "Bash(xargs grep -l -i \"outputFileTracing\\\\|serverExternalPackages\")"
     ]
   }
 }
