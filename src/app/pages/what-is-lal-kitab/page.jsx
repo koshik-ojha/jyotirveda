@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 const PILLARS = [
-  { icon: FiBookOpen, title: "Origin", body: "Compiled in 1939 by Pandit Roopchand Joshi in Punjab. The original five volumes are written in Urdu verse." },
+  { icon: FiBookOpen, title: "Origin", body: "Compiled in by author in India. The original five volumes are written in Urdu verse." },
   { icon: FiCalendar, title: "Fixed Houses", body: "Unlike classical Vedic astrology, the houses never rotate. House 1 is always Aries; House 12 always Pisces." },
   { icon: FiTool, title: "Totke (Remedies)", body: "Remedies use household objects — wheat, jaggery, mustard oil, copper coins — rather than expensive gemstones." },
   { icon: FiHeart, title: "Karmic Debts", body: "The system reads ancestral debts (rinanubandh) — Pitri Rinn, Matri Rinn — and prescribes acts of atonement." },

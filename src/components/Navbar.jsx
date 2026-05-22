@@ -479,12 +479,20 @@ export default function Navbar() {
               <span className="hidden md:inline">Search</span>
               <kbd className="hidden md:inline px-1 py-0.5 rounded border border-white/10 text-[10px] text-white/20">⌃K</kbd>
             </button>
+            <button
+                onClick={() => { setMobileOpen(false); setSearchOpen(true); }}
+                className="xl:hidden p-2 text-white/60 hover:text-white"
+                aria-label="Search"
+              >
+                <FiSearch className="w-5 h-5" />
+              </button>
             {/* <button
               onClick={() => setLoginOpen(true)}
               className="bg-linear-to-r from-veda-orange to-veda-gold text-white px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-md shadow-veda-orange/25 hover:shadow-veda-orange/45 hover:scale-105 transition-all duration-200"
             >
               Login
             </button> */}
+            
             <button
               onClick={() => setMobileOpen(true)}
               className="xl:hidden p-2 text-white/60 hover:text-white transition-colors"
@@ -512,31 +520,14 @@ export default function Navbar() {
                 unoptimized
                 className="h-8 w-auto"
               />
-              <div className="flex items-center gap-2">
-                <div className="flex rounded-lg overflow-hidden border border-white/10 text-xs">
-                  {LANGUAGES.map((l) => (
-                    <button
-                      key={l.code}
-                      type="button"
-                      onClick={() => setMobileLangCode(l.code)}
-                      className={cn(
-                        "px-3 py-1.5 transition-colors",
-                        mobileLangCode === l.code
-                          ? "bg-veda-orange text-white font-semibold"
-                          : "text-white/50 hover:text-white",
-                      )}
-                    >
-                      {l.label}
-                    </button>
-                  ))}
-                </div>
-              <button
-                onClick={() => setMobileOpen(false)}
-                className="p-2 text-white/60 hover:text-white"
-                aria-label="Close menu"
-              >
-                <FiX className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">                
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 text-white/60 hover:text-white"
+                  aria-label="Close menu"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
               </div>
             </div>
             <div className="flex-1 overflow-y-auto">

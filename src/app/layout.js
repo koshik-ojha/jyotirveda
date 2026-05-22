@@ -32,11 +32,11 @@ export const metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://jyotirveda.wedoodles.com"
   ),
   title: {
-    default: "VedaAI – Wisdom of the Ages, Precision of AI",
-    template: "%s | VedaAI",
+    default: "Jyotirveda – Wisdom of the Ages, Precision of AI",
+    template: "%s | Jyotirveda",
   },
   description:
-    "Unlock the secrets of the cosmos. VedaAI fuses 8,000 years of Vedic tradition with cutting-edge neural networks for life's most accurate spiritual guidance.",
+    "Unlock the secrets of the cosmos. Jyotirveda fuses 8,000 years of Vedic tradition with cutting-edge neural networks for life's most accurate spiritual guidance.",
   keywords: [
     "Vedic astrology",
     "kundli",
@@ -48,18 +48,18 @@ export const metadata = {
     "lal kitab",
     "AI astrology",
   ],
-  applicationName: "VedaAI",
-  authors: [{ name: "VedaAI" }],
+  applicationName: "Jyotirveda",
+  authors: [{ name: "Jyotirveda" }],
   openGraph: {
     type: "website",
-    siteName: "VedaAI",
-    title: "VedaAI – Wisdom of the Ages, Precision of AI",
+    siteName: "Jyotirveda",
+    title: "Jyotirveda – Wisdom of the Ages, Precision of AI",
     description:
       "AI-powered Vedic astrology: free kundli, daily horoscope, panchang, numerology, matching, muhurat and more.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "VedaAI – Wisdom of the Ages, Precision of AI",
+    title: "Jyotirveda – Wisdom of the Ages, Precision of AI",
     description:
       "AI-powered Vedic astrology: free kundli, daily horoscope, panchang, numerology, matching, muhurat and more.",
   },
