@@ -300,11 +300,11 @@ export default function KundliForm({ lang: langProp }) {
 
           <div className="md:col-span-2 flex justify-end mt-2">
             <Button
-              variant="secondary-fill"
+              variant="primary-fill"
               size="md"
               type="submit"
               disabled={submitting}
-              className="rounded-xl px-8"
+              className="rounded-xl px-8 bg-zinc-700 hover:bg-zinc-600 text-white"
             >
               {submitting
                 ? (lang === "hi" ? "गणना हो रही है…" : "Computing…")
